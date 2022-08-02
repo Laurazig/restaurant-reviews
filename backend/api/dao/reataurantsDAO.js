@@ -1,4 +1,4 @@
-let restaurants  //32:00
+let restaurants  
 
 export default class Restaurants   {
     static async injectDB(conn) { //call method when server starts, connects to DB
