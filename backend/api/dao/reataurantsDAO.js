@@ -1,4 +1,4 @@
-let restaurants
+let restaurants  //32:00
 
 export default class Restaurants   {
     static async injectDB(conn) { //call method when server starts, connects to DB
@@ -57,6 +57,7 @@ export default class Restaurants   {
 }
 
 //new code
+//DAO
 //conn
 //static
 // cursor.limit
