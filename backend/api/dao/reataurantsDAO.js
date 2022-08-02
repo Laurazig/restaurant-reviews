@@ -1,9 +1,7 @@
-29:00
-
 let restaurants
 
-export default class RestaurantsDAO {
-    static async injectDB(conn) {
+export default class Restaurants   {
+    static async injectDB(conn) { //call method when server starts, connects to DB
         if(restaurants){
             return
         }
@@ -15,10 +13,11 @@ export default class RestaurantsDAO {
             )
         }
     }
-    static async getRestaurants({  //method
+    static async getRestaurants({  //method 
         filters = null,
         page = 0,
         restaurantsPerPage = 20,
+
     } = {}) {
         let query
         if(filters) {
@@ -30,13 +29,41 @@ export default class RestaurantsDAO {
                 query = { "address.zipcode": { $eq: filters["zipcode"] } }
             }
         }
+
         let cursor
+
         try {
             cursor = await restaurants
                 .find(query)
         } catch (e) {
-            console.error('Unable to issue find command, ${e}')
+            console.error(`Unable to issue find command, ${e}`)
+            return { restarantsList: [], totalNumRestaurants:0}
+        }
+
+        const displayCursor = cursor.limit(restaurantsPerPage).skip(restaurantsPerPage * page)
+
+        try {
+            const restaurantsList =await displayCursor.toArray()
+            const totalNumRestaurants = await restaurants.countDocuments(query)
+
+            return {restaurantsList, totalNumRestaurants}
+        } catch (e) {
+            console.error(
+                `convert cursor to array or problem counting documents, ${e}`,
+            )
             return { restarantsList: [], totalNumRestaurants:0}
         }
     }
 }
+
+//new code
+//conn
+//static
+// cursor.limit
+//skip
+//.countDocuments
+
+//to revise
+//export default class
+//.find
+//toArray
