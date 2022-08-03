@@ -56,15 +56,3 @@ export default class Restaurants   {
     }
 }
 
-//new code
-//DAO
-//conn
-//static
-// cursor.limit
-//skip
-//.countDocuments
-
-//to revise
-//export default class
-//.find
-//toArray
