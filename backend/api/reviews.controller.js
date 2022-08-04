@@ -55,7 +55,7 @@ export default class ReviewsController {
 
     static async apiDeleteReview(req, res, next) {
         try {
-            const reviewId = req.query._id
+            const reviewId = req.query.id
             const userId = req.body.user_id  //not standard for HTTP del request have anything in body-  simple authentication
             console.log(reviewId)
             const ReviewResponse = await ReviewsDAO.deleteReview(

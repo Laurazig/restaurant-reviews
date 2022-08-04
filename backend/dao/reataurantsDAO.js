@@ -1,3 +1,5 @@
+import mongodb from "mongodb"   
+const ObjectId = mongodb.ObjectId
 let restaurants  
 
 export default class Restaurants   {
@@ -52,6 +54,34 @@ export default class Restaurants   {
                 `convert cursor to array or problem counting documents, ${e}`,
             )
             return { restarantsList: [], totalNumRestaurants:0}
+        }
+    }
+    static async getRestaurantById(id) {
+        try {
+            const pipeline = [
+                {
+                    $match: {
+                        _id: new ObjectId(id),
+                    },
+                },
+                    {
+                        $lookup:{
+                            from: "reviews",
+                            let:  {
+                                id: "$_id",
+                            },
+                            pipeline: [
+                                {
+                                    $match: {
+                                        $expr: {
+                                            $eq: ["$restaurants_id", "$$id"],
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+            ]
         }
     }
 }
