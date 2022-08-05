@@ -75,13 +75,39 @@ export default class Restaurants   {
                                     $match: {
                                         $expr: {
                                             $eq: ["$restaurants_id", "$$id"],
-                                        }
-                                    }
-                                }
-                            ]
-                        }
-                    }
+                                        },
+                                    },
+                                },
+                                {
+                                    $sort: {
+                                        date: -1,
+                                    },
+                                },
+                            ],
+                            as: "reviews",
+                        },
+                    },
+                    {
+                        $addFields: {
+                            reviews: "$reviews",
+                        },
+                    },
             ]
+            return await restaurants.aggregate(pipeline).next()
+        } catch (e) {
+            console.error(`Something went wrong in getRestaurantById: ${e}`)
+            throw e 
+        }
+    }
+
+    static async getCuisines(){
+        let cuisines = []
+        try {
+            cuisines = await restaurants.distinct("cuisine")
+            return cuisines
+        } catch (e) {
+            console.error(`Unable to get cuisines, $(e)`)
+            return cuisines
         }
     }
 }
