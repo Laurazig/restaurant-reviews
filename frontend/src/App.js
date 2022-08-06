@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import AddReview from "./components/add-review";
+import Restaurants from "./components/restaurants";
+import RestaurantsList from "./components/restaurants-list";
+import Login from "./components/login";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a href="/restaurants" className="navbar-brand">
+          Restaurant Reviews
         </a>
-      </header>
+      </nav>
+      
     </div>
   );
 }
