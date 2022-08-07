@@ -48,7 +48,8 @@ function App() {
 
         <div className="contailer mt-3">
           <Routes>
-            <Route path={["/", "/restaurants"]}  element={<RestaurantsList />} />    {/**{["/", "/restaurants"]} */}
+            <Route path="/"  element={<RestaurantsList />} />    {/**{["/", "/restaurants"]} */}
+            <Route path="/restaurants"  element={<RestaurantsList />} /> 
             {/* <Route exact path={["/", "/restaurants"]} component={RestaurantsList} /> */}
             <Route path="restaurants/:id/review" element={<AddReview user={user} />} />
             <Route path="/restaurants/:id" element={<Restaurant user={user} />} />
