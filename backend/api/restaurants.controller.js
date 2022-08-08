@@ -1,4 +1,3 @@
-import { json } from "express"
 import RestaurantsDAO from "../dao/reataurantsDAO.js"
 
 export default class RestaurantsController {
